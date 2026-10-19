@@ -72,8 +72,13 @@ select.chip{max-width:min(240px,100%)}
 .rt-res{font-size:13px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
 .rt-res[hidden]{display:none}
 .rt-res .big{font-family:var(--f-mono);font-weight:700;font-size:15px;color:var(--accent)}
-.map-box{position:relative;height:580px}
-@media (max-width:920px){.map-box{height:440px}}
+.map-box{position:relative;height:max(590px,calc(50vh + 175px))}
+@media (max-width:920px){.map-box{height:max(420px,calc(34vh + 220px))}}
+.fsbtn{position:absolute;right:10px;bottom:28px;z-index:1000;border:2px solid rgba(0,0,0,.2);background:#fff;color:#13232C;border-radius:8px;padding:6px 10px;font-weight:600;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.map-card.full{position:fixed;inset:0;z-index:1500;border-radius:0;border:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.map-card.full .map-box{height:auto;flex:1}
+.map-card.full .map-tools{max-height:40vh;overflow:auto}
+body.lock{overflow:hidden}
 #map{position:absolute;inset:0;background:var(--surface-2)}
 .results{position:absolute;left:10px;right:10px;top:10px;z-index:1100;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);max-height:70%;overflow:auto}
 .results[hidden]{display:none}
@@ -223,6 +228,57 @@ select.chip{max-width:min(240px,100%)}
 .box code{font-family:var(--f-mono);font-size:12px;word-break:break-all}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:13px;z-index:4000;max-width:90vw;text-align:center}
 .toast[hidden]{display:none}
+.mnav{display:none}
+.place,.card{-webkit-touch-callout:none}
+.ctx{position:fixed;z-index:2500;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);min-width:220px;max-width:min(300px,calc(100vw - 16px));max-height:min(420px,70vh);overflow:auto;padding:6px}
+.ctx[hidden]{display:none}
+.ctx .h{font-size:12px;color:var(--muted);padding:6px 10px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ctx button{display:flex;width:100%;gap:8px;align-items:baseline;border:0;background:none;border-radius:8px;padding:8px 10px;text-align:left;font-size:13.5px}
+.ctx button:hover,.ctx button:focus-visible{background:var(--surface-2)}
+.ctx button b{font-family:var(--f-mono);min-width:44px}
+.ctx button span{color:var(--muted);font-size:12px;margin-left:auto}
+.ctx button.cur{color:var(--accent);font-weight:600}
+/* ---- phone layout ---- */
+@media (max-width:760px){
+  body{padding-block:10px calc(76px + env(safe-area-inset-bottom,0px));padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px))}
+  .wrap{gap:12px}
+  .sign{padding:12px 14px;gap:8px 10px;border-radius:12px}
+  .sign h1{font-size:22px;flex:1 1 100%}
+  .sign h1 small{font-size:10px}
+  .sign .grow{display:none}
+  .sbtn{padding:6px 10px;gap:6px}
+  .sbtn .mono{font-size:14px}
+  #shareBtn>span:last-child{display:none}
+  .banner{font-size:12.5px;padding:8px 10px}
+  .map-card,.panel{border-radius:12px}
+  .map-tools{padding:8px;gap:6px}
+  #jumps,#filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  #jumps::-webkit-scrollbar,#filters::-webkit-scrollbar{display:none}
+  .search input{flex-basis:100%;font-size:16px}
+  .search .btn{flex:1;justify-content:center}
+  .rt select.chip{max-width:38vw}
+  .chip{padding:6px 11px;font-size:13px}
+  .map-box{height:max(400px,calc(32vh + 220px))}
+  .pop{bottom:10px;left:8px;width:calc(100% - 16px)}
+  .tabs button{padding:12px 2px;font-size:13px}
+  .tab-body{padding:10px}
+  .grip{padding:8px 6px;font-size:17px}
+  .starbtn{font-size:22px;padding:6px}
+  .board-head h2{font-size:20px}
+  .board-head p{font-size:12px}
+  .board{scroll-snap-type:x mandatory;gap:10px;margin-inline:-2px}
+  .day{flex-basis:84vw;scroll-snap-align:center}
+  .overlay{align-items:flex-end;padding:0}
+  .modal{width:100%;max-height:92vh;border-radius:16px 16px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+  .f input,.f select,.f textarea{font-size:16px}
+  .grid2{grid-template-columns:1fr}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .mnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:1400;background:var(--surface);border-top:1px solid var(--line);
+    padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+  .mnav button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted);padding:4px 0;font-weight:600}
+  .mnav button b{font-size:19px;line-height:1;font-weight:400}
+  .mnav button.on{color:var(--accent)}
+}
 </style>
 </head>
 <body>
@@ -240,7 +296,7 @@ select.chip{max-width:min(240px,100%)}
   <div class="banner" id="banner" hidden></div>
 
   <div class="top">
-    <section class="map-card" aria-label="지도">
+    <section class="map-card" id="mapCard" aria-label="지도">
       <div class="map-tools">
         <form class="search" id="searchForm">
           <input id="q" type="search" placeholder="장소·식당 검색 (예: Griffith Observatory, 라멘 Las Vegas)" autocomplete="off">
@@ -256,10 +312,11 @@ select.chip{max-width:min(240px,100%)}
         <div id="map"></div>
         <div class="results" id="results" hidden></div>
         <div class="pop" id="pop" hidden></div>
+        <button type="button" class="fsbtn" id="fsBtn">⤢ 크게 보기</button>
       </div>
     </section>
 
-    <aside class="panel">
+    <aside class="panel" id="panel">
       <div class="tabs" role="tablist">
         <button role="tab" id="tab-places" aria-selected="true" type="button">장소<span class="n" id="n-places">0</span></button>
         <button role="tab" id="tab-flights" aria-selected="false" type="button">항공<span class="n" id="n-flights">0</span></button>
@@ -270,7 +327,7 @@ select.chip{max-width:min(240px,100%)}
     </aside>
   </div>
 
-  <section>
+  <section id="boardSec">
     <div class="board-head">
       <h2>날짜별 일정</h2>
       <p>카드를 끌어 날짜·순서를 바꾸고, 눌러서 시간을 고쳐요. 장소 목록을 끌어다 놓으면 일정이 생겨요(휴대폰은 ⋮⋮ 잡고 끌기). 카드 사이에 차 이동 시간이 나오고, 날짜 머리글을 누르면 그날 동선이 화살표로 지도에 그려져요.</p>
@@ -281,8 +338,11 @@ select.chip{max-width:min(240px,100%)}
 
 <div class="overlay" id="overlay" hidden><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
 <div class="toast" id="toast" hidden></div>
+<div class="ctx" id="ctx" role="menu" hidden></div>
+<nav class="mnav" aria-label="빠른 이동"><button type="button" data-go="map"><b>🗺</b>지도</button><button type="button" data-go="places"><b>📍</b>장소</button><button type="button" data-go="board"><b>📅</b>일정</button><button type="button" data-go="expenses"><b>💰</b>경비</button><button type="button" data-go="more"><b>✈</b>항공·숙소</button></nav>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.13.5/dist/Leaflet.GoogleMutant.js"></script>
 <script>
 (function(){
 "use strict";
@@ -616,12 +676,23 @@ function dayRouteLink(d){const u=dayPoints(d).map(p=>p.o.lat+","+p.o.lng);if(u.l
   return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(u[0])+"&destination="+encodeURIComponent(u[u.length-1])+(w.length?"&waypoints="+encodeURIComponent(w.join("|")):"")+"&travelmode=driving";}
 
 /* ============ map ============ */
-const map=L.map("map",{zoomControl:true}).fitBounds(JUMPS[0][1]);
+const map=L.map("map",{zoomControl:true,tapHold:true}).fitBounds(JUMPS[0][1]);
 const bases={"기본 지도":L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors"}),
   "지형":L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri"}),
   "위성":L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri"})};
 if(/^https?:/.test(location.protocol))bases["OpenStreetMap"]=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'});
-bases["기본 지도"].addTo(map);L.control.layers(bases,null,{position:"topright"}).addTo(map);
+bases["기본 지도"].addTo(map);const layerCtl=L.control.layers(bases,null,{position:"topright"}).addTo(map);
+/* Korean-labelled Google map when a Google API key is set */
+function useGoogleMap(){
+  if(!GKEY||!L.gridLayer||!L.gridLayer.googleMutant)return;
+  loadGoogle().then(()=>{
+    const road=L.gridLayer.googleMutant({type:"roadmap",maxZoom:21});const hyb=L.gridLayer.googleMutant({type:"hybrid",maxZoom:21});
+    layerCtl.addBaseLayer(road,"구글 지도 (한국어)");layerCtl.addBaseLayer(hyb,"구글 위성 (한국어)");
+    let cur=null;map.eachLayer(l=>{if(Object.values(bases).includes(l))cur=l;});
+    if(LS.get("wt-base","google")==="google"){if(cur)map.removeLayer(cur);road.addTo(map);}
+    map.on("baselayerchange",e=>LS.set("wt-base",(e.layer===road||e.layer===hyb)?"google":"other"));
+  }).catch(e=>{console.warn(e);toast("구글 지도를 불러오지 못해 기본 지도로 보여 드려요. API 키 설정을 확인해 주세요.");});
+}
 const lyr=L.layerGroup().addTo(map),tmp=L.layerGroup().addTo(map),rtl=L.layerGroup().addTo(map);
 let didFit=false;
 function pinIcon(color,cls,txt,star){const sz=txt?24:18;
@@ -654,7 +725,8 @@ function renderMap(){
   if(S.filterDay!=="all")for(let i=1;i<items.length;i++)drawLeg(items[i-1].o,items[i].o,lyr,"#0D6B49",false);
   items.forEach(it=>{const o=it.o;const sel=S.sel===o.id;
     const m=L.marker([o.lat,o.lng],{icon:pinIcon(catColor(it.kind==="stay"?"stay":o.cat),(it.kind==="stay"?"stay ":"")+(sel?"sel":""),it.txt,it.kind==="place"&&starCount(o)>0),zIndexOffset:sel?1000:0})
-      .on("click",e=>{L.DomEvent.stopPropagation(e);select(o.id,false);}).addTo(lyr);
+      .on("click",e=>{L.DomEvent.stopPropagation(e);select(o.id,false);})
+      .on("contextmenu",e=>{if(it.kind!=="place")return;L.DomEvent.stop(e);const oe=e.originalEvent||{};dayMenu(oe.clientX||innerWidth/2,oe.clientY||innerHeight/2,"place",o.id);}).addTo(lyr);
     if(sel||it.txt)m.bindTooltip(esc(o.name),{permanent:true,direction:"right",offset:[12,0],className:"lbl"});});
   if(!didFit&&items.length){didFit=true;fitItems(items);}
   rtl.clearLayers();const a=anyById(S.rt.from),b=anyById(S.rt.to);
@@ -731,7 +803,7 @@ async function nearbyOSM(){
 /* Google Places (optional key) */
 let gLoad=null;
 function loadGoogle(){if(!GKEY)return Promise.reject({code:"nokey"});if(gLoad)return gLoad;
-  gLoad=new Promise((res,rej)=>{window.__gmcb=()=>res();window.gm_authFailure=()=>{toast("Google API 키가 거부됐어요. 키 제한(웹사이트 주소)과 Places API (New) 사용 설정을 확인해 주세요.");};
+  gLoad=new Promise((res,rej)=>{window.__gmcb=()=>{Promise.all([google.maps.importLibrary("maps"),google.maps.importLibrary("places")]).then(()=>res(),rej);};window.gm_authFailure=()=>{toast("Google API 키가 거부됐어요. 키 제한(웹사이트 주소)과 Places API (New) 사용 설정을 확인해 주세요.");};
     const s=document.createElement("script");s.src="https://maps.googleapis.com/maps/api/js?key="+encodeURIComponent(GKEY)+"&v=weekly&language=ko&loading=async&callback=__gmcb";
     s.onerror=()=>rej({code:"load"});document.head.appendChild(s);});return gLoad;}
 const PRICE={FREE:"무료",INEXPENSIVE:"$",MODERATE:"$$",EXPENSIVE:"$$$",VERY_EXPENSIVE:"$$$$"};
@@ -949,7 +1021,7 @@ function shareForm(){
   h+='<h4>① GitHub 연결 (처음 만드는 사람)</h4><div class="grid2"><div class="f"><label for="gO">GitHub 아이디</label><input id="gO" value="'+esc(GH?GH.o:"")+'" placeholder="예: minsu123" autocapitalize="off"></div>'+
     '<div class="f"><label for="gR">데이터 저장소 이름</label><input id="gR" value="'+esc(GH?GH.r:"west-trip-data")+'" autocapitalize="off"></div></div>'+
     '<div class="f"><label for="gT">토큰 (github_pat_로 시작)</label><input id="gT" type="password" value="'+esc(GH?GH.t:"")+'" autocomplete="off"></div>'+
-    '<h4>② 평점 검색용 Google API 키 (선택)</h4><div class="f"><label for="gK">Google Maps API 키</label><input id="gK" type="password" value="'+esc(GKEY)+'" placeholder="없으면 비워 두세요" autocomplete="off"><span class="hint">넣으면 검색 결과에 ★평점과 리뷰 수가 나오고 평점 순으로 정렬돼요.</span></div>'+
+    '<h4>② 한국어 구글 지도·평점 검색용 Google API 키 (선택)</h4><div class="f"><label for="gK">Google Maps API 키</label><input id="gK" type="password" value="'+esc(GKEY)+'" placeholder="없으면 비워 두세요" autocomplete="off"><span class="hint">넣으면 지도가 한국어 구글 지도로 바뀌고, 검색 결과에 ★평점과 리뷰 수가 나와요. 초대 링크에 함께 담겨 친구도 자동으로 쓰게 돼요.</span></div>'+
     '<h4>③ 받은 초대 링크·코드 (친구)</h4><div class="f"><input id="fJoin" placeholder="https://...#join=... 또는 코드" aria-label="초대 링크나 코드"></div>'+
     (GH?'<div class="row"><button class="btn small danger" type="button" id="disc">연결 끊고 이 기기에만 저장</button></div>':'')+foot(false,"저장하고 연결");
   openModal(h,()=>{
@@ -993,6 +1065,46 @@ function drawCal(){const first=new Date(Date.UTC(cal.y,cal.m,1)),dow=first.getUT
   let changed=false;try{const o=unb64url(m[1]);if(o.g&&o.g.t){changed=!GH||GH.t!==o.g.t||GH.r!==o.g.r;LS.set("wt-cfg",{gh:o.g,gkey:o.k||""});}}catch(e){}
   history.replaceState(null,"",location.pathname+location.search);if(changed)location.reload();})();
 startStore();
+useGoogleMap();
+/* right-click / long-press: pick a day */
+function dayMenu(x,y,kind,id){
+  const it=kind==="place"?place(id):S.plans.find(p=>p.id===id);if(!it)return;
+  if(needMe(()=>dayMenu(x,y,kind,id)))return;
+  const days=tripDays();const cur=kind==="plan"?it.date:"";const counts={};S.plans.forEach(p=>counts[p.date]=(counts[p.date]||0)+1);
+  const m=$("ctx");
+  m.innerHTML='<div class="h">'+(kind==="place"?"일정에 추가: ":"다른 날로 옮기기: ")+esc(it.name||it.title||"")+'</div>'+
+    days.map((d,i)=>'<button type="button" role="menuitem" data-day="'+d+'"'+(d===cur?' class="cur"':'')+'><b>Day '+(i+1)+'</b>'+md(d)+' ('+wd(d)+')<span>'+(d===cur?'지금 날짜':(counts[d]||0)+'개')+'</span></button>').join("");
+  m.hidden=false;
+  const w=m.offsetWidth,h=m.offsetHeight;m.style.left=Math.max(8,Math.min(x,innerWidth-w-8))+"px";m.style.top=Math.max(8,Math.min(y,innerHeight-h-8))+"px";
+  m.onclick=e=>{const b=e.target.closest("[data-day]");if(!b)return;const d=b.dataset.day;closeCtx();
+    if(kind==="place"){store.add("plans",{date:d,order:nextOrder(d),title:it.name,placeId:it.id,start:"",end:"",note:""});toast(md(d)+" 일정에 추가했어요.");}
+    else if(d!==it.date){store.update("plans",it.id,{date:d,order:nextOrder(d)});toast(md(d)+"로 옮겼어요.");}};
+  ctxOpenedAt=Date.now();
+}
+let ctxOpenedAt=0;
+function closeCtx(){$("ctx").hidden=true;}
+document.addEventListener("pointerdown",e=>{if(!$("ctx").hidden&&!e.target.closest("#ctx"))closeCtx();},true);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCtx();});
+window.addEventListener("scroll",()=>{if(Date.now()-ctxOpenedAt>300)closeCtx();},true);
+function ctxTarget(el){const c=el.closest&&el.closest('.place[data-id],.card[data-drag="plan"]');if(!c)return null;return{kind:c.classList.contains("place")?"place":"plan",id:c.dataset.id};}
+document.addEventListener("contextmenu",e=>{const t=ctxTarget(e.target);if(!t)return;e.preventDefault();
+  if(Date.now()-ctxOpenedAt<900)return;dayMenu(e.clientX,e.clientY,t.kind,t.id);});
+let lp=null;
+document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||e.target.closest(".grip,button,a,input,select"))return;const t=ctxTarget(e.target);if(!t)return;
+  lp={x:e.clientX,y:e.clientY,timer:setTimeout(()=>{lp=null;suppressClick=true;setTimeout(()=>suppressClick=false,700);
+    if(navigator.vibrate)navigator.vibrate(15);dayMenu(e.clientX,e.clientY,t.kind,t.id);},550)};});
+document.addEventListener("pointermove",e=>{if(lp&&Math.hypot(e.clientX-lp.x,e.clientY-lp.y)>8){clearTimeout(lp.timer);lp=null;}});
+["pointerup","pointercancel"].forEach(ev=>document.addEventListener(ev,()=>{if(lp){clearTimeout(lp.timer);lp=null;}}));
+/* fullscreen map */
+$("fsBtn").onclick=()=>{const c=$("mapCard");const on=!c.classList.contains("full");c.classList.toggle("full",on);document.body.classList.toggle("lock",on);
+  $("fsBtn").textContent=on?"✕ 작게 보기":"⤢ 크게 보기";setTimeout(()=>map.invalidateSize(),60);};
+/* phone bottom nav */
+document.querySelector(".mnav").addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(!b)return;const g=b.dataset.go;
+  if($("mapCard").classList.contains("full")&&g!=="map")$("fsBtn").click();
+  if(g==="map"){$("mapCard").scrollIntoView({behavior:"smooth",block:"start"});}
+  else if(g==="board"){$("boardSec").scrollIntoView({behavior:"smooth",block:"start"});}
+  else{S.tab=g==="more"?(S.tab==="flights"?"stays":"flights"):g;renderPanel();$("panel").scrollIntoView({behavior:"smooth",block:"start"});}
+  document.querySelectorAll(".mnav button").forEach(x=>x.classList.toggle("on",x===b));});
 setTimeout(()=>map.invalidateSize(),200);
 if(!S.meId)setTimeout(()=>{if($("overlay").hidden)askMe();},700);
 window.__wt={expenseShares,settlement,normalize,b64url,unb64url,S};
